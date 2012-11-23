@@ -1,0 +1,21 @@
+{
+    "name": "ronanguilloux/temperature-pi",
+    "type": "application to be run as a daemon",
+    "description": "Raspberry Pi based temperature logger using a DS18B20 1-Wire digital temperature sensor",
+    "keywords": ["temperature", "logger", "DS18B20", "sensors", "raspberry", "raspberry pi"],
+    "homepage": "https://github.com/ronanguilloux/temperature-pi",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ronan Guilloux",
+            "email": "ronan.guilloux@gmail.com"
+        }
+    ],
+   "require": {
+        "php": ">=5.3.0",
+        "ronanguilloux/php-gpio": "master-dev"
+    },
+   "autoload": {
+        "psr-0": { "TemperaturePi": "src/" }
+    }
+}
