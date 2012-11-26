@@ -4,11 +4,18 @@ temperature-pi
 **temperature-pi** is a simple Raspberry Pi based temperature logger using a DS18B20 1-Wire digital temperature sensor, & a local sqlite database.
 It's based on the [php-gpio](https://github.com/ronanguilloux/php-gpio) PHP library
 
-[![Build Status](https://secure.travis-ci.org/ronanguilloux/temperature-pi.png?branch=master)](http://travis-ci.org/ronanguilloux/temperature-pi)
+[![sensor](http://avrlab.com/upload_files/ds18b20-dallas.JPG)]
 
+Installation (hardware)
+-----------------------
 
-Installation
-------------
+[![mounting schema](http://www.cl.cam.ac.uk/freshers/raspberrypi/tutorials/temperature/sensor-connection.png)]
+
+See this [tutorial](http://www.cl.cam.ac.uk/freshers/raspberrypi/tutorials/temperature)
+from the Cambridge University CompSci Laboratory Raspberry Pi dedicated Pages
+
+Installation (software)
+-----------------------
 
 The recommended way to install temperature-pi is through [composer](http://getcomposer.org).
 
