@@ -50,11 +50,16 @@ require_once 'src/autoload.php';
 Usage
 -----
 
-``` php
-<?php
-    require 'vendor/autoload.php';
-    $sensor = new PhpGpio\Sensors\DS18B20();
-    $currentTemperature = sensor->read();
+Add kernel modules from the Linux Kernel:
+
+``` bash
+$ sudo modprobe w1-gpio
+$ sudo modprobe w1-therm
+```
+
+Run the executable php file
+``` bash
+$ thermometer
 ```
 
 
