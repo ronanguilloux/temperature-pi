@@ -4,3 +4,4 @@ composer.phar
 phpunit.phar
 phpunit.xml
 php-cs-fixer.phar
+resources/sqlite/log.db
