@@ -18,6 +18,25 @@ class Logger extends \SQlite3
         $this->db = 'temperature';
     }
 
+    public function fetchAll()
+    {
+        $return = array();
+        $this->open($this->dbPath);
+        $result = $this->query('SELECT datetime, celsius FROM temperature');
+        while ($row = $result->fetchArray()) {
+            //$return[$row['datetime']] = $row['celsius'];
+            $return[] = $row['celsius'];
+        }
+        $this->close();
+        return $return;
+    }
+
+    public function writeJsDatas()
+    {
+        $datas = $this->fetchAll();
+        var_dump($datas);
+    }
+
     public function persist($reset = false)
     {
         $this->currentTemperature = $this->sensor->read();
@@ -27,13 +46,8 @@ class Logger extends \SQlite3
         }
         $this->exec('CREATE TABLE IF NOT EXISTS temperature (datetime DATETIME, celsius FLOAT)');
         $this->exec("INSERT INTO temperature (datetime, celsius) VALUES (datetime('NOW'), " . $this->currentTemperature . ")");
-        /*
-        $result = $this->query('SELECT datetime, celsius FROM temperature');
-        while ($row = $result->fetchArray()) {
-            var_dump($row);
-        }
-        */
-        echo "\n" . date("d/m/Y H:i:s") . " : " . $this->currentTemperature;
+
+        echo "\n" . date("d/m/Y H:i:s") . "|" . $this->currentTemperature;
         $this->close();
     }
 
