@@ -7,3 +7,4 @@ use TemperaturePi\Logger;
 
 $log = new Logger;
 $log->persist();
+$log->writeJsDatas();
