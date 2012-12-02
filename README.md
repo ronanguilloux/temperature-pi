@@ -64,9 +64,14 @@ $ sudo modprobe w1-gpio
 $ sudo modprobe w1-therm
 ```
 
-Run the executable php file
+Run the executable php file to record temperatures
 ``` bash
 $ thermometer
+```
+
+Run as a webserver to get the graph
+``` bash
+$ php -S "`hostname -I`:8080" -t web/
 ```
 
 
