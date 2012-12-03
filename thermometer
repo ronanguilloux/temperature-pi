@@ -5,6 +5,9 @@ require __DIR__.'/vendor/autoload.php';
 
 use TemperaturePi\Logger;
 
+//TODO: Lauch as sudo & check+run modprobe w1-gpio & w1-therm
+
+
 $log = new Logger;
 $log->persist();
 $log->writeJsDatas();
