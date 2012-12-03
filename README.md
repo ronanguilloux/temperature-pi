@@ -71,8 +71,9 @@ Get a graph
 To get the graph, run this app as a webserver
 ``` bash
 $ php -S "`hostname -I`:8080" -t web/
+```
 
-![DS18B20+Resistor](https://github.com/ronanguilloux/temperature-pi/raw/master/example.png)
+![DS18B20+Resistor](https://raw.github.com/ronanguilloux/temperature-pi/master/example.png)
 
 
 Credits
