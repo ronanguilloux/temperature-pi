@@ -5,8 +5,15 @@ require __DIR__.'/vendor/autoload.php';
 
 use TemperaturePi\Logger;
 
-//TODO: Lauch as sudo & check+run modprobe w1-gpio & w1-therm
+/*
+if('root' !== $_SERVER['USER'] || empty($SERVER['SUDO_USER'])){
+    die("[ABORT] Please run this script as root\n");
+}
+ */
 
+if(!file_exists('/sys/bus/w1/devices/28-000003ced8f4/w1_slave')) {
+    die("[ABORT] Please run: sudo modprobe w1-gpio; sudo modprobe w1-therm\n");
+}
 
 $log = new Logger;
 $log->persist();
