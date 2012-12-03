@@ -4,15 +4,18 @@ temperature-pi
 **temperature-pi** is a simple Raspberry Pi based temperature logger using a DS18B20 1-Wire digital temperature sensor, & a local sqlite database.
 It's based on the [php-gpio](https://github.com/ronanguilloux/php-gpio) PHP library
 
-[![sensor](http://avrlab.com/upload_files/ds18b20-dallas.JPG)]
+![DS18B20+Resistor](http://robotics.org.za/image/cache/data/Sensor/temperature/af00374-250x250.jpg)
+
+![DS18B20 mounting schema](http://pi-io.com/wp-content/uploads/2012/11/ds18b20.jpeg)
+
 
 Installation (hardware)
 -----------------------
 
-[![mounting schema](http://www.cl.cam.ac.uk/freshers/raspberrypi/tutorials/temperature/sensor-connection.png)]
+![DS18B20 sensor connection](http://www.cl.cam.ac.uk/freshers/raspberrypi/tutorials/temperature/sensor-connection.png) 
 
-See this [tutorial](http://www.cl.cam.ac.uk/freshers/raspberrypi/tutorials/temperature)
-from the Cambridge University CompSci Laboratory Raspberry Pi dedicated Pages
+See this very easy-reading [tutorial](http://www.cl.cam.ac.uk/freshers/raspberrypi/tutorials/temperature) on the Cambridge University CompSci Laboratory Raspberry Pi dedicated pages.
+
 
 Installation (software)
 -----------------------
@@ -37,25 +40,9 @@ $ wget http://getcomposer.org/composer.phar
 $ php composer.phar install
 ```
 
-Now you can add the autoloader, and you will have access to the library:
 
-``` php
-<?php
-
-require 'vendor/autoload.php';
-```
-
-If you don't use neither **Composer** nor a _ClassLoader_ in your application, just require the provided autoloader:
-
-``` php
-<?php
-
-require_once 'src/autoload.php';
-```
-
-
-Usage
------
+Set up the sensor
+-----------------
 
 Add kernel modules from the Linux Kernel:
 
@@ -64,15 +51,28 @@ $ sudo modprobe w1-gpio
 $ sudo modprobe w1-therm
 ```
 
+Run a cronjob & log temperatures
+--------------------------------
+
 Run the executable php file to record temperatures
 ``` bash
 $ thermometer
 ```
 
-Run as a webserver to get the graph
+This previous command line can easely be added in your crontab to log the temperature through the day (and night)
+
+``` cron
+30 * * * * /my/path/to/the/temperature-pi/thermometer >> /my/path/to/the/temperature-pi/resources/log
+```
+
+Get a graph
+-----------
+
+To get the graph, run this app as a webserver
 ``` bash
 $ php -S "`hostname -I`:8080" -t web/
-```
+
+![DS18B20+Resistor](https://github.com/ronanguilloux/temperature-pi/raw/master/example.png)
 
 
 Credits
@@ -80,6 +80,7 @@ Credits
 
 * Ronan Guilloux <ronan.guilloux@gmail.com>
 * [All contributors](https://github.com/ronanguilloux/temperature-pi/contributors)
+* Images in the README.md : pi-io.com, robotics.org.za, Cambridge University
 
 
 License
