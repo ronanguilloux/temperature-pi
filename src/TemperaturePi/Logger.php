@@ -28,6 +28,7 @@ class Logger extends \SQlite3
             $return[] = $row['celsius'];
         }
         $this->close();
+
         return $return;
     }
 
@@ -36,7 +37,7 @@ class Logger extends \SQlite3
         $jsFile = __DIR__ . "/../../web/js/data.js";
         $datas = $this->fetchAll();
         $jsContent = "var data = [['Date', 'Celsius']";
-        foreach($datas as $index=>$celsius) {
+        foreach ($datas as $index=>$celsius) {
             $jsContent .= "\n,[$index,$celsius]";
         }
         $jsContent .= "];";
@@ -47,7 +48,7 @@ class Logger extends \SQlite3
     {
         $this->currentTemperature = $this->sensor->read();
         $this->open($this->dbPath);
-        if($reset) {
+        if ($reset) {
             $this->exec('DROP TABLE temperature');
         }
         $this->exec('CREATE TABLE IF NOT EXISTS temperature (datetime DATETIME, celsius FLOAT)');
