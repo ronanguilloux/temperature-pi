@@ -33,8 +33,14 @@ class Logger extends \SQlite3
 
     public function writeJsDatas()
     {
+        $jsFile = __DIR__ . "/../../web/js/data.js";
         $datas = $this->fetchAll();
-        var_dump($datas);
+        $jsContent = "var data = [['Date', 'Celsius']";
+        foreach($datas as $index=>$celsius) {
+            $jsContent .= "\n,[$index,$celsius]";
+        }
+        $jsContent .= "];";
+        file_put_contents($jsFile, $jsContent);
     }
 
     public function persist($reset = false)
@@ -47,7 +53,7 @@ class Logger extends \SQlite3
         $this->exec('CREATE TABLE IF NOT EXISTS temperature (datetime DATETIME, celsius FLOAT)');
         $this->exec("INSERT INTO temperature (datetime, celsius) VALUES (datetime('NOW'), " . $this->currentTemperature . ")");
 
-        echo "\n" . date("d/m/Y H:i:s") . "|" . $this->currentTemperature;
+        //echo "\n" . date("d/m/Y H:i:s") . "|" . $this->currentTemperature;
         $this->close();
     }
 

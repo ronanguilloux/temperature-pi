@@ -1,4 +1,5 @@
 resources/
+web/js/data.js
 vendor/
 composer.lock
 composer.phar
