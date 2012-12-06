@@ -6,7 +6,7 @@ require __DIR__.'/vendor/autoload.php';
 use TemperaturePi\Logger;
 
 /*
-if('root' !== $_SERVER['USER'] || empty($SERVER['SUDO_USER'])){
+if('root' !== $_SERVER['USER'] || empty($_SERVER['SUDO_USER'])){
     die("[ABORT] Please run this script as root\n");
 }
  */
