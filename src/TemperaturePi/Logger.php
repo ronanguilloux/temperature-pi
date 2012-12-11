@@ -14,7 +14,6 @@ class Logger extends \SQlite3
     public function __construct()
     {
         $this->sensor = new DS18B20();
-        $this->sensor->setup();
         $this->dbPath = __DIR__ . '/../../resources/sqlite/log.db';
         $this->db = 'temperature';
     }
