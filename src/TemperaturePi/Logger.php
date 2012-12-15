@@ -32,23 +32,29 @@ class Logger extends \SQlite3
         return $return;
     }
 
+    /**
+     * Write a ./web/js/data.js json file (see ajax calls in ./web)
+     * @return $this
+     */
     public function writeJsDatas()
     {
         $jsFile = __DIR__ . "/../../web/js/data.js";
         $datas = $this->fetchAll();
-        $jsContent = "var data = [['Date', 'Celsius']";
+        $jsContent = '{ "table": [["Date", "Celsius"]';
         foreach ($datas as $index=>$celsius) {
             $jsContent .= "\n,[$index,$celsius]";
         }
-        $jsContent .= "];";
+        $jsContent .= "]}";
         file_put_contents($jsFile, $jsContent);
+
+        return $this;
     }
 
     public function persist($trace = false, $reset = false)
     {
         $this->currentTemperature = $this->sensor->read();
         if($trace){
-            echo sprintf("%s celsius\n", $this->currentTemperature);
+            echo sprintf("%s : %s celsius\n", date('Y-m-d H:i:s'), $this->currentTemperature);
         }
         $this->open($this->dbPath);
         if ($reset) {
