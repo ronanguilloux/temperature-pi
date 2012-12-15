@@ -44,9 +44,12 @@ class Logger extends \SQlite3
         file_put_contents($jsFile, $jsContent);
     }
 
-    public function persist($reset = false)
+    public function persist($trace = false, $reset = false)
     {
         $this->currentTemperature = $this->sensor->read();
+        if($trace){
+            echo sprintf("%s celsius\n", $this->currentTemperature);
+        }
         $this->open($this->dbPath);
         if ($reset) {
             $this->exec('DROP TABLE temperature');
