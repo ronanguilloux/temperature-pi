@@ -6,20 +6,19 @@ It's based on the [php-gpio](https://github.com/ronanguilloux/php-gpio) PHP libr
 
 ![DS18B20+Resistor](http://robotics.org.za/image/cache/data/Sensor/temperature/af00374-250x250.jpg)
 
-![DS18B20 mounting schema](http://pi-io.com/wp-content/uploads/2012/11/ds18b20.jpeg)
-
 
 Installation (hardware)
 -----------------------
 
-First, install the DS18B20 on your bread board, wired to the #4 gpio pin: 
-
 ![DS18B20 sensor connection](http://www.cl.cam.ac.uk/freshers/raspberrypi/tutorials/temperature/sensor-connection.png) 
 
-See this very easy-reading [tutorial](http://www.cl.cam.ac.uk/freshers/raspberrypi/tutorials/temperature) on the Cambridge University CompSci Laboratory Raspberry Pi dedicated pages.
+Read this very easy-reading [tutorial](http://www.cl.cam.ac.uk/freshers/raspberrypi/tutorials/temperature) on the Cambridge University CompSci Laboratory Raspberry Pi dedicated pages.
 
-Then add a led & a resistor & wired it to the #17 gpio pin.
+Then install the DS18B20 on your bread board, wired to the #4 gpio pin, following the tutorial indications.
 
+Then add a led & a resistor wired to the #17 gpio pin.
+
+![Mounting LED & resistor](https://github.com/ronanguilloux/temperature-pi/raw/master/resources/images/led-resistor.png)
 
 Installation (software)
 -----------------------
@@ -44,24 +43,23 @@ $ wget http://getcomposer.org/composer.phar
 $ php composer.phar install
 ```
 
-Then allow your raspberry pi to blink the #17 gpio pin wired LED without sudo.
+Then allow your raspberry pi to blink the #17 gpio pin wired LED without sudo:
+Add a symlink to the blinker (see ronanguilloux/php-gpio)
 
-First, add a symlink to the blinker (see ronanguilloux/php-gpio)
+    $ ln -s vendor/ronanguilloux/php-gpio/blinker blinker
 
-    $ ln -s vendor/ronanguilloux/php-gpio/blinker.php blinker.php
-
-Then allow the blinker to be run without sudo. Edit your `/etc/sudoers` file:
+Next, allow the blinker to be run without sudo. Edit your `/etc/sudoers` file:
 
 ``` bash
 $ sudo visudo
 ```
 
-Add this two lines in your `/etc/sudoers` file : (replace MyLinuxUser with your login name)
+Then add this two lines in your `/etc/sudoers` file : (replace MyLinuxUser with your login name)
 This will allow you and Apache2 to run the blinker without `sudo`
 
 ``` bash
-MyLinuxUser ALL=NOPASSWD: /path/to/blinker.php
-www-data ALL=NOPASSWD: /path/to/blinker.php
+MyLinuxUser ALL=NOPASSWD: /path/to/blinker
+www-data ALL=NOPASSWD: /path/to/blinker
 ```
 
 
@@ -74,6 +72,7 @@ Add kernel modules from the Linux Kernel:
 $ sudo modprobe w1-gpio
 $ sudo modprobe w1-therm
 ```
+
 
 Run a cronjob & log temperatures
 --------------------------------
