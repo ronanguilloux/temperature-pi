@@ -12,9 +12,13 @@ It's based on the [php-gpio](https://github.com/ronanguilloux/php-gpio) PHP libr
 Installation (hardware)
 -----------------------
 
+First, install the DS18B20 on your bread board, wired to the #4 gpio pin: 
+
 ![DS18B20 sensor connection](http://www.cl.cam.ac.uk/freshers/raspberrypi/tutorials/temperature/sensor-connection.png) 
 
 See this very easy-reading [tutorial](http://www.cl.cam.ac.uk/freshers/raspberrypi/tutorials/temperature) on the Cambridge University CompSci Laboratory Raspberry Pi dedicated pages.
+
+Then add a led & a resistor & wired it to the #17 gpio pin.
 
 
 Installation (software)
@@ -38,6 +42,26 @@ And run these two commands to install it:
 ``` bash
 $ wget http://getcomposer.org/composer.phar
 $ php composer.phar install
+```
+
+Then allow your raspberry pi to blink the #17 gpio pin wired LED without sudo.
+
+First, add a symlink to the blinker (see ronanguilloux/php-gpio)
+
+    $ ln -s vendor/ronanguilloux/php-gpio/blinker.php blinker.php
+
+Then allow the blinker to be run without sudo. Edit your `/etc/sudoers` file:
+
+``` bash
+$ sudo visudo
+```
+
+Add this two lines in your `/etc/sudoers` file : (replace MyLinuxUser with your login name)
+This will allow you and Apache2 to run the blinker without `sudo`
+
+``` bash
+MyLinuxUser ALL=NOPASSWD: /path/to/blinker.php
+www-data ALL=NOPASSWD: /path/to/blinker.php
 ```
 
 

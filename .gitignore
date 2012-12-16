@@ -1,4 +1,5 @@
-resources/
+resources/sqlite
+resources/log
 web/js/data.js
 vendor/
 composer.lock
