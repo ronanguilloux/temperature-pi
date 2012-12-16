@@ -3,6 +3,7 @@
 namespace TemperaturePi;
 
 use PhpGpio\Sensors\DS18B20;
+use PhpGpio\PhpGpio;
 
 class Logger extends \SQlite3
 {
