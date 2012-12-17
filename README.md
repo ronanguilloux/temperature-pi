@@ -18,7 +18,7 @@ Then install the DS18B20 on your bread board, wired to the #4 gpio pin, followin
 
 Then add a led & a resistor wired to the #17 gpio pin.
 
-![Mounting LED & resistor](https://github.com/ronanguilloux/temperature-pi/raw/master/resources/images/led-resistor.png)
+![Circuit snapshot](https://raw.github.com/ronanguilloux/temperature-pi/master/resources/images/mounting.jpg)
 
 Installation (software)
 -----------------------
