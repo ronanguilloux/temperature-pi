@@ -43,18 +43,15 @@ $ wget http://getcomposer.org/composer.phar
 $ php composer.phar install
 ```
 
-Then allow your raspberry pi to blink the #17 gpio pin wired LED without sudo:
-Add a symlink to the blinker (see ronanguilloux/php-gpio)
-
-    $ ln -s vendor/ronanguilloux/php-gpio/blinker blinker
-
-Next, allow the blinker to be run without sudo. Edit your `/etc/sudoers` file:
+Oprionnaly, allow the `vendor/ronanguilloux/php-gpio/blinker` file to be run without sudo:
+Edit your `/etc/sudoers` file:
 
 ``` bash
 $ sudo visudo
 ```
 
-Then add this two lines in your `/etc/sudoers` file : (replace MyLinuxUser with your login name)
+Then add this two lines in your `/etc/sudoers` file : 
+(replace MyLinuxUser with your login name & change the path to the blinker)
 This will allow you and Apache2 to run the blinker without `sudo`
 
 ``` bash
@@ -82,10 +79,10 @@ Run the executable php file to record temperatures
 $ thermometer
 ```
 
-This previous command line can easely be added in your crontab to log the temperature through the day (and night)
+To trace temperatures chages, add this into your crontab to log the temperature through the day, each 30 minutes
 
 ``` cron
-30 * * * * /my/path/to/the/temperature-pi/thermometer >> /my/path/to/the/temperature-pi/resources/log
+0,30 * * * * /my/path/to/the/temperature-pi/thermometer >> /my/path/to/the/temperature-pi/resources/log
 ```
 
 Get a graph
