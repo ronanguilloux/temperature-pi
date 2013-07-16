@@ -1,5 +1,5 @@
 if ( ! window.console ) console = { log: function(){} };
-google.load("visualization", "1", {packages:["corechart"]});
+google.load("visualization", "1", {packages:["annotatedtimeline"]});
 google.setOnLoadCallback(drawChart);
 function drawChart() {
     $.ajax({
@@ -12,16 +12,26 @@ function drawChart() {
         success: function(data) {
             $('#chart_div').empty();
             var lastTemp = data.table[data.table.length -1][1] + ' celsius';
-            console.log('last temp: ' + lastTemp);
             if('undefined' != data) {
-                var dataTable = google.visualization.arrayToDataTable(data.table);
+                for(row in data){
+                    for(col in data[row]) {
+                        data[row][col][0] = new Date(eval(data[row][col][0]));
+                    }
+                }
+                var dataTable = new google.visualization.DataTable();
+                dataTable.addColumn('datetime', 'Date');
+                dataTable.addColumn('number', 'Celsius');
+                for(key in data.table) {
+                    dataTable.addRow([new Date(data.table[key][0]), parseFloat(data.table[key][1])]);
+                }
                 var options = {
                     title: $('title').text() + ' | Last temp: ' + lastTemp
+                    , displayAnnotations: true
                 };
-                var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('chart_div'));
                 chart.draw(dataTable, options);
             }
-            setTimeout("drawChart();", 5000); // recursion (milliseconds)
+            //setTimeout("drawChart();", 5000); // recursion (milliseconds) for dev purpose only
         }
     });
 }

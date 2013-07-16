@@ -18,4 +18,4 @@ if(!file_exists('/sys/bus/w1/devices/28-000003ced8f4/w1_slave')) {
 $log = new Logger;
 $log->persist(true);
 $log->writeJsDatas();
-$result = exec('sudo ./blinker 17 200000');
+//$result = exec('sudo ./blinker 17 200000');
