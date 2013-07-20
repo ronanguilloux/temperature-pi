@@ -47,7 +47,7 @@ class Logger extends \SQlite3
             $date = date_parse_from_format("Y-m-d H:i:s", $date);
             $date = sprintf("%d,%d,%d,%d,%d,%d",
                 $date['year']
-                , $date['month']
+                , ($date['month']-1)
                 , $date['day']
                 , $date['hour']
                 , $date['minute']
