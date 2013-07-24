@@ -63,11 +63,18 @@ www-data ALL=NOPASSWD: /path/to/blinker
 Set up the sensor
 -----------------
 
-Add kernel modules from the Linux Kernel:
+Using the shell, manually add theses kernel modules:
 
 ``` bash
 $ sudo modprobe w1-gpio
 $ sudo modprobe w1-therm
+```
+
+To load such kernel modules automatically at boot time, edit the `/etc/modules` file & add these two lines:
+
+```
+w1-gpio
+w1-therm
 ```
 
 
